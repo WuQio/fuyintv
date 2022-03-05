@@ -12,6 +12,7 @@
     </el-input>
 
     <el-dialog
+            width="850px"
             :close-on-click-modal="false"
             :close-on-press-escape="false"
             top="8vh"
@@ -59,6 +60,7 @@
   import Card from './components/Card'
   import Episode from './components/Episode'
   import VideoPlayer from './components/VideoPlayer'
+  import json from './assets/fuyin_tv_all_movie'
 
   const fs = require('fs')
   let allData;
@@ -164,6 +166,7 @@
           if (
             allData[key].title.indexOf(this.searchText) >=0
             || allData[key].content.indexOf(this.searchText) >=0
+            || allData[key].actor.indexOf(this.searchText) >=0
           ) {
             searchRes.push(allData[key])
           }
@@ -173,8 +176,9 @@
       }
     },
     mounted () {      // 同步读取文件
-      let allMovieStr = fs.readFileSync([__dirname, '\\assets\\fuyin_tv_all_movie.json'].join(''), 'utf-8')
-      allData = JSON.parse(allMovieStr)
+      // let allMovieStr = fs.readFileSync([__dirname, '\\assets\\fuyin_tv_all_movie.json'].join(''), 'utf-8')
+      // allData = JSON.parse(allMovieStr)
+      allData = json;
       this.initData(allData);
     }
   }
