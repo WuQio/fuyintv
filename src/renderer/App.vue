@@ -60,9 +60,9 @@
   import Card from './components/Card'
   import Episode from './components/Episode'
   import VideoPlayer from './components/VideoPlayer'
-  import json from './assets/fuyin_tv_all_movie'
+  import json from './assets/mini'
+  import {getMovieInfo} from './axios/api';
 
-  const fs = require('fs')
   let allData;
 
   export default {
@@ -108,9 +108,12 @@
         this.showData = showData
       },
       showEpisode (obj) {
-        console.log(obj)
-        this.drawer = true
-        this.$data.episodeObj = obj
+        let that = this;
+        getMovieInfo(obj.movid)
+          .then(function (resp) {
+          that.$data.episodeObj = resp.data;
+          that.drawer = true;
+        })
       },
       handleSizeChange (val) { // 修改每页条数时
         console.log(`每页 ${val} 条`)
@@ -125,7 +128,7 @@
       handleCurrentChange (val) { // 修改页码时
         console.log(`当前页: ${val} 页`)
         this.cursor = this.pageSize * (val - 1)
-        this.episodeObj = this.allData[this.movieIdArr[this.cursor]]
+        // this.episodeObj = this.allData[this.movieIdArr[this.cursor]]
         // 修改显示的内容
         let idxMax = (this.cursor + this.pageSize >= this.movieIdArr.length)
           ?

@@ -25,7 +25,7 @@
     </el-table>
 </template>
 <script>
-    import {getM3u8} from '@/utils/requests'
+    import {getM3u8} from '../axios/api'
 
   export default {
     name: 'Episode',

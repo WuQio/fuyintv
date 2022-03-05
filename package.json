@@ -53,6 +53,7 @@
     }
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "element-ui": "^2.12.0",
     "multispinner": "^0.2.1",
     "video.js": "^7.17.0",
